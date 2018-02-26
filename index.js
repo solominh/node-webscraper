@@ -12,13 +12,16 @@ async function main() {
       // Get selected element
       const response = await axios.get(url);
       const $ = cheerio.load(response.data);
-      const selector = "#js-truyencv-content";
+      const selector = "#js-truyencv-read-content";
       let result = $(selector);
 
       // Clean up
-      $("div", result).remove();
-      $("p:last-child", result).remove();
-      $("p:nth-last-child(1)", result).remove();
+      $("#favorite_video", result).remove();
+      $(".footer", result).remove();
+      const content = $("#js-truyencv-content", result);
+      $("div", content).remove();
+      $("p:last-child", content).remove();
+      $("p:nth-last-child(1)", content).remove();
 
       // Save file
       const fileName = `${ebookName}/chương-${i}.html`;
